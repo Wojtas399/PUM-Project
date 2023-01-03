@@ -1,4 +1,6 @@
-package com.example.countriesquiz
+package com.example.countriesquiz.features.home
+
+import com.example.countriesquiz.R
 
 sealed class BottomNavItem(
   var title: String,

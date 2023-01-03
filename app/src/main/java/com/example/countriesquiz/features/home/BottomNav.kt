@@ -1,4 +1,4 @@
-package com.example.countriesquiz
+package com.example.countriesquiz.features.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
