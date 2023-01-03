@@ -24,6 +24,7 @@ class HomeViewModel : ViewModel() {
   private fun getRouteTitle(route: String) = when (route) {
     BottomNavItem.Quiz.screen_route -> BottomNavItem.Quiz.title
     BottomNavItem.Library.screen_route -> BottomNavItem.Library.title
+    BottomNavItem.Progress.screen_route -> BottomNavItem.Progress.title
     else -> ""
   }
 }

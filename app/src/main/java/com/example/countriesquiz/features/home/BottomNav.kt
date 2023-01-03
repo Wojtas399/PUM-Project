@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.countriesquiz.features.library.LibraryScreen
+import com.example.countriesquiz.features.progress.ProgressScreen
 import com.example.countriesquiz.features.quiz.QuizScreen
 
 @Composable
@@ -20,6 +21,7 @@ fun BottomNavigation(navController: NavController) {
   val items = listOf(
     BottomNavItem.Quiz,
     BottomNavItem.Library,
+    BottomNavItem.Progress,
   )
   BottomNavigation {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -67,6 +69,9 @@ fun NavigationGraph(navController: NavHostController) {
     }
     composable(BottomNavItem.Library.screen_route) {
       LibraryScreen()
+    }
+    composable(BottomNavItem.Progress.screen_route) {
+      ProgressScreen()
     }
   }
 }

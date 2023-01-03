@@ -9,4 +9,5 @@ sealed class BottomNavItem(
 ) {
   object Quiz : BottomNavItem("Quiz", R.drawable.ic_quiz_24, "quiz")
   object Library : BottomNavItem("Library", R.drawable.ic_library_24, "library")
+  object Progress: BottomNavItem("Progress", R.drawable.ic_show_chart_24, "progress")
 }
