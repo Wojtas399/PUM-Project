@@ -8,7 +8,9 @@ import com.example.countriesquiz.ui.theme.CountriesQuizTheme
 import com.example.countriesquiz.features.home.Home
 import com.example.countriesquiz.ui.theme.Primary
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
