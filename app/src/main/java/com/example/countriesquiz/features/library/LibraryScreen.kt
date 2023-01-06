@@ -18,11 +18,11 @@ fun LibraryScreen(
 
   if (countries != null) {
     LazyColumn {
-      items(countries) { country ->
-        Text(text = country.name)
-      }
+      items(countries) { LibraryItem(country = it) }
     }
   } else {
     Text(text = "There is no countries...")
   }
 }
+
+

@@ -8,6 +8,6 @@ sealed class BottomNavItem(
   var screen_route: String
 ) {
   object Quiz : BottomNavItem("Quiz", R.drawable.ic_quiz_24, "quiz")
-  object Library : BottomNavItem("Library", R.drawable.ic_library_24, "library")
+  object Library : BottomNavItem("Countries Library", R.drawable.ic_library_24, "library")
   object Progress: BottomNavItem("Progress", R.drawable.ic_show_chart_24, "progress")
 }
