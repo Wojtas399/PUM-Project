@@ -2,10 +2,7 @@ package com.example.countriesquiz.features.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,7 +38,12 @@ fun Home(
     },
     topBar = {
       TopAppBar(
-        title = { Text(homeState.screenTitle ?: "") },
+        title = {
+          Text(
+            text = homeState.screenTitle ?: "",
+            color = Color.White,
+          )
+        },
         backgroundColor = MaterialTheme.colors.primary,
         contentColor = Color.Black,
       )

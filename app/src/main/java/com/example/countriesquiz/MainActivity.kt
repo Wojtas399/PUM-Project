@@ -52,7 +52,8 @@ private fun MainApp() {
     }
     composable("${NavItem.Quiz.screen_route}/{quizType}") { backStackEntry ->
       QuizScreen(
-        quizType = backStackEntry.arguments?.getString("quizType")?.toQuizType()
+        quizType = backStackEntry.arguments?.getString("quizType")?.toQuizType(),
+        globalNavController = globalNavController,
       )
     }
     composable(NavItem.Summary.screen_route) {
