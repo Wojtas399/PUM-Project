@@ -1,6 +1,7 @@
 package com.example.countriesquiz.features.home
 
 import androidx.lifecycle.ViewModel
+import com.example.countriesquiz.features.home.bottomNav.BottomNavItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,7 +23,7 @@ class HomeViewModel : ViewModel() {
   }
 
   private fun getRouteTitle(route: String) = when (route) {
-    BottomNavItem.Quiz.screen_route -> BottomNavItem.Quiz.title
+    BottomNavItem.QuizSelection.screen_route -> BottomNavItem.QuizSelection.title
     BottomNavItem.Library.screen_route -> BottomNavItem.Library.title
     BottomNavItem.Progress.screen_route -> BottomNavItem.Progress.title
     else -> ""

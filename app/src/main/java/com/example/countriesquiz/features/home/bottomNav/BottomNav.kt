@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.home
+package com.example.countriesquiz.features.home.bottomNav
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -8,18 +8,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.countriesquiz.features.library.LibraryScreen
-import com.example.countriesquiz.features.progress.ProgressScreen
-import com.example.countriesquiz.features.quiz.QuizScreen
 
 @Composable
 fun BottomNavigation(navController: NavController) {
   val items = listOf(
-    BottomNavItem.Quiz,
+    BottomNavItem.QuizSelection,
     BottomNavItem.Library,
     BottomNavItem.Progress,
   )
@@ -46,7 +40,6 @@ fun BottomNavigation(navController: NavController) {
         selected = currentRoute == item.screen_route,
         onClick = {
           navController.navigate(item.screen_route) {
-
             navController.graph.startDestinationRoute?.let { screen_route ->
               popUpTo(screen_route) {
                 saveState = true
@@ -57,21 +50,6 @@ fun BottomNavigation(navController: NavController) {
           }
         }
       )
-    }
-  }
-}
-
-@Composable
-fun NavigationGraph(navController: NavHostController) {
-  NavHost(navController, startDestination = BottomNavItem.Quiz.screen_route) {
-    composable(BottomNavItem.Quiz.screen_route) {
-      QuizScreen()
-    }
-    composable(BottomNavItem.Library.screen_route) {
-      LibraryScreen()
-    }
-    composable(BottomNavItem.Progress.screen_route) {
-      ProgressScreen()
     }
   }
 }

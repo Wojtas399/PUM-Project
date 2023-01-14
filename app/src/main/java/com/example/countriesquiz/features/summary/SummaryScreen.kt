@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.quiz
+package com.example.countriesquiz.features.summary
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,25 +12,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
-enum class QuizType {
-  Capitals,
-  Flags,
-  Populations,
-}
-
 @Composable
-fun QuizScreen(
-  quizType: QuizType?,
-) {
+fun SummaryScreen() {
   Column(
     modifier = Modifier
       .fillMaxSize()
       .wrapContentSize(Alignment.Center)
   ) {
     Text(
-      text = "Quiz Screen $quizType",
+      text = "Summary Screen",
       fontWeight = FontWeight.Bold,
-      color = Color.Black,
+      color = Color.White,
       modifier = Modifier.align(Alignment.CenterHorizontally),
       textAlign = TextAlign.Center,
       fontSize = 20.sp
