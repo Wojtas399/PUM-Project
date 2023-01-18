@@ -2,7 +2,6 @@ package com.example.countriesquiz.data.countryApi
 
 import com.example.countriesquiz.BuildConfig
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -27,11 +26,11 @@ class CountryApiClient @Inject constructor() {
     .connectTimeout(30, TimeUnit.SECONDS)
     .also { client ->
       if (BuildConfig.DEBUG) {
-        client.addInterceptor(
-          HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-          }
-        )
+//        client.addInterceptor(
+//          HttpLoggingInterceptor().apply {
+//            level = HttpLoggingInterceptor.Level.BODY
+//          }
+//        )
       }
     }.build()
 }

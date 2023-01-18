@@ -18,6 +18,7 @@ class CountryRepositoryImpl @Inject constructor(
       name = apiCountry.name.official,
       capital = apiCountry.capital?.first() ?: "unknown",
       flag = apiCountry.flag,
+      population = apiCountry.population,
     )
   }
 }

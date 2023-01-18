@@ -4,13 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 
 enum class QuizType {
@@ -23,7 +19,15 @@ enum class QuizType {
 fun QuizScreen(
   quizType: QuizType?,
   globalNavController: NavHostController,
+  quizViewModel: QuizViewModel = hiltViewModel(),
 ) {
+  val quizState by quizViewModel.state.collectAsState()
+  val question: Question? = quizState.question
+  
+  LaunchedEffect(key1 = quizType) {
+    quizViewModel.initialize(quizType)
+  }
+
   Scaffold(
     topBar = {
       TopAppBar(
@@ -45,16 +49,13 @@ fun QuizScreen(
     },
   ) { padding ->
     Column(
-      modifier = Modifier.padding(padding)
+      modifier = Modifier.padding(padding),
     ) {
-      Text(
-        text = "Quiz Screen $quizType",
-        fontWeight = FontWeight.Bold,
-        color = Color.Black,
-        modifier = Modifier.align(Alignment.CenterHorizontally),
-        textAlign = TextAlign.Center,
-        fontSize = 20.sp
-      )
+      if (question != null) {
+        Text(text = question.question)
+      } else {
+        Text(text = "There is no drawn countries")
+      }
     }
   }
 }
