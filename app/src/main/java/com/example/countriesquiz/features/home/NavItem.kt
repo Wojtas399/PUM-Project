@@ -5,5 +5,4 @@ sealed class NavItem(
 ) {
   object Home: NavItem("home")
   object Quiz: NavItem("quiz")
-  object Summary: NavItem("summary")
 }

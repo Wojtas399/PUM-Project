@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.countriesquiz.view_models.Question
+import com.example.countriesquiz.view_models.QuestionStatus
+import com.example.countriesquiz.view_models.QuizState
 
 enum class QuizType {
   Capitals,
@@ -21,21 +23,14 @@ enum class QuizType {
 
 @Composable
 fun QuizScreen(
-  quizType: QuizType?,
+  quizState: QuizState,
+  onNextQuestionButtonPressed: () -> Unit,
   globalNavController: NavHostController,
-  quizViewModel: QuizViewModel = hiltViewModel(),
 ) {
-  val quizState by quizViewModel.state.collectAsState()
-  val question: Question? = quizState.question
-
-  LaunchedEffect(key1 = quizType) {
-    quizViewModel.initialize(quizType)
-  }
-
   Scaffold(
     topBar = {
       TopAppBar(
-        quizType = quizType,
+        quizType = quizState.quizType,
         globalNavController = globalNavController,
       )
     },
@@ -52,25 +47,24 @@ fun QuizScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
-        QuestionText(question)
+        QuestionText(quizState.currentQuestion)
         Spacer(modifier = Modifier.height(32.dp))
         Answers(
-          quizType = quizType,
-          answer1 = quizState.answer1,
-          answer2 = quizState.answer2,
-          answer3 = quizState.answer3,
-          answer4 = quizState.answer4,
+          quizType = quizState.quizType,
+          answer1 = quizState.currentQuestion?.answer1,
+          answer2 = quizState.currentQuestion?.answer2,
+          answer3 = quizState.currentQuestion?.answer3,
+          answer4 = quizState.currentQuestion?.answer4,
         )
       }
       QuizStats(
-        questionNumber = quizState.questionNumber,
+        questionNumber = quizState.currentQuestionIndex + 1,
         points = quizState.points
       )
-      NextQuestionButton(
-        enabled = quizState.questionStatus == QuestionStatus.Checked,
-        onClick = {
-          quizViewModel.nextQuestion()
-        }
+      BottomButton(
+        currentQuestionIndex = quizState.currentQuestionIndex,
+        enabled = quizState.currentQuestionStatus == QuestionStatus.Checked,
+        onClick = onNextQuestionButtonPressed,
       )
     }
   }
@@ -111,7 +105,8 @@ fun QuestionText(
 }
 
 @Composable
-fun NextQuestionButton(
+fun BottomButton(
+  currentQuestionIndex: Int,
   enabled: Boolean,
   onClick: () -> Unit,
 ) {
@@ -129,7 +124,13 @@ fun NextQuestionButton(
       enabled = enabled,
       onClick = onClick
     ) {
-      Text(text = "Next question")
+      Text(
+        text = if (currentQuestionIndex == 9) {
+          "Finish"
+        } else {
+          "Next question"
+        }
+      )
     }
   }
 }

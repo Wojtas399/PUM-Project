@@ -18,7 +18,7 @@ import com.example.countriesquiz.features.quiz.QuizType
 fun QuizSelectionScreen(
   globalNavController: NavHostController,
 ) {
-  fun navigateToQuizScreen(quizType: QuizType) {
+  fun navigateToQuiz(quizType: QuizType) {
     globalNavController.navigate(
       "${NavItem.Quiz.screen_route}/$quizType"
     )
@@ -41,21 +41,21 @@ fun QuizSelectionScreen(
     CustomButton(
       label = "Stolice",
       onClick = {
-        navigateToQuizScreen(QuizType.Capitals)
+        navigateToQuiz(QuizType.Capitals)
       },
     )
     FreeSpace()
     CustomButton(
       label = "Flagi",
       onClick = {
-        navigateToQuizScreen(QuizType.Flags)
+        navigateToQuiz(QuizType.Flags)
       },
     )
     FreeSpace()
     CustomButton(
       label = "Populacje",
       onClick = {
-        navigateToQuizScreen(QuizType.Populations)
+        navigateToQuiz(QuizType.Populations)
       }
     )
   }

@@ -11,9 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.countriesquiz.ui.theme.CountriesQuizTheme
 import com.example.countriesquiz.features.home.Home
 import com.example.countriesquiz.features.home.NavItem
-import com.example.countriesquiz.features.quiz.QuizScreen
 import com.example.countriesquiz.features.quiz.QuizType
-import com.example.countriesquiz.features.summary.SummaryScreen
+import com.example.countriesquiz.ui.screens.Quiz
 import com.example.countriesquiz.ui.theme.Primary
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,13 +50,11 @@ private fun MainApp() {
       Home(globalNavController = globalNavController)
     }
     composable("${NavItem.Quiz.screen_route}/{quizType}") { backStackEntry ->
-      QuizScreen(
-        quizType = backStackEntry.arguments?.getString("quizType")?.toQuizType(),
+      Quiz(
+        quizType = backStackEntry.arguments?.getString("quizType")
+          ?.toQuizType(),
         globalNavController = globalNavController,
       )
-    }
-    composable(NavItem.Summary.screen_route) {
-      SummaryScreen()
     }
   }
 }
