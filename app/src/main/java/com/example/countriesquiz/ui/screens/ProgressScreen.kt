@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.summary
+package com.example.countriesquiz.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,20 +11,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.countriesquiz.view_models.Question
 
 @Composable
-fun SummaryScreen(
-  points: Int,
-  questions: List<Question>
-) {
+fun ProgressScreen() {
   Column(
     modifier = Modifier
       .fillMaxSize()
       .wrapContentSize(Alignment.Center)
   ) {
     Text(
-      text = "Summary Screen",
+      text = "Progress Screen",
       fontWeight = FontWeight.Bold,
       color = Color.White,
       modifier = Modifier.align(Alignment.CenterHorizontally),

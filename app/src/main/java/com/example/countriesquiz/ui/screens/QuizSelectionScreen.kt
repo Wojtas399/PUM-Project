@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.quiz_selection
+package com.example.countriesquiz.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -11,8 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.countriesquiz.features.home.NavItem
-import com.example.countriesquiz.features.quiz.QuizType
+import com.example.countriesquiz.ui.nav.NavItem
 
 @Composable
 fun QuizSelectionScreen(

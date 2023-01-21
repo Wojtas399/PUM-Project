@@ -9,10 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.countriesquiz.ui.theme.CountriesQuizTheme
-import com.example.countriesquiz.features.home.Home
-import com.example.countriesquiz.features.home.NavItem
-import com.example.countriesquiz.features.quiz.QuizType
+import com.example.countriesquiz.ui.screens.Home
+import com.example.countriesquiz.ui.nav.NavItem
 import com.example.countriesquiz.ui.screens.Quiz
+import com.example.countriesquiz.ui.screens.QuizType
 import com.example.countriesquiz.ui.theme.Primary
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint

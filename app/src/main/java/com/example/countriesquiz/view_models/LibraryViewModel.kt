@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.library
+package com.example.countriesquiz.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

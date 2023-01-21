@@ -1,4 +1,4 @@
-package com.example.countriesquiz.features.home.bottomNav
+package com.example.countriesquiz.ui.nav
 
 import com.example.countriesquiz.R
 

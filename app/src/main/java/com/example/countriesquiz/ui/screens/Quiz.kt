@@ -6,9 +6,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.countriesquiz.features.quiz.QuizScreen
-import com.example.countriesquiz.features.quiz.QuizType
-import com.example.countriesquiz.features.summary.SummaryScreen
 import com.example.countriesquiz.view_models.QuizViewModel
 
 @Composable

@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.example.countriesquiz.domain.entities.Country
 import com.example.countriesquiz.domain.useCases.GetRandomCountriesUseCase
-import com.example.countriesquiz.features.quiz.QuizType
+import com.example.countriesquiz.ui.screens.QuizType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
