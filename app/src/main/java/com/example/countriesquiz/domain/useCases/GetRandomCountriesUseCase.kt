@@ -11,6 +11,6 @@ class GetRandomCountriesUseCase @Inject constructor(
     amount: Int,
   ) : List<Country> {
     val allCountries: List<Country> = countryRepository.getAllCountries()
-    return allCountries.asSequence().shuffled().take(amount).toList()
+    return allCountries.shuffled().take(amount).toList()
   }
 }
