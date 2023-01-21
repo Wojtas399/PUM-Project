@@ -2,8 +2,8 @@ package com.example.countriesquiz.view_models
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.example.countriesquiz.domain.entities.Country
-import com.example.countriesquiz.domain.useCases.GetRandomCountriesUseCase
+import com.example.countriesquiz.entities.Country
+import com.example.countriesquiz.repositories.CountryRepository
 import com.example.countriesquiz.ui.screens.QuizType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +30,7 @@ data class QuizState(
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-  private val getRandomCountriesUseCase: GetRandomCountriesUseCase,
+  private val countryRepository: CountryRepository,
 ) : ViewModel() {
   private val _state = MutableStateFlow(QuizState())
   private var drawnCountries: MutableList<Country> = mutableListOf()
@@ -39,7 +39,8 @@ class QuizViewModel @Inject constructor(
 
   fun initialize(quizType: QuizType?) {
     runBlocking {
-      drawnCountries = getRandomCountriesUseCase(amount = 10).toMutableList()
+      val allCountries = countryRepository.getAllCountries()
+      drawnCountries = allCountries.shuffled().take(10).toMutableList()
       initializeQuestions(quizType)
     }
   }

@@ -2,8 +2,8 @@ package com.example.countriesquiz.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.countriesquiz.domain.entities.Country
-import com.example.countriesquiz.domain.useCases.GetAllCountriesUseCase
+import com.example.countriesquiz.entities.Country
+import com.example.countriesquiz.repositories.CountryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +18,7 @@ data class LibraryState(
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-  private val getAllCountriesUseCase: GetAllCountriesUseCase
+  private val countryRepository: CountryRepository
 ) : ViewModel() {
   private val _state = MutableStateFlow(LibraryState())
 
@@ -26,7 +26,7 @@ class LibraryViewModel @Inject constructor(
 
   init {
     viewModelScope.launch {
-      val countries: List<Country> = getAllCountriesUseCase()
+      val countries: List<Country> = countryRepository.getAllCountries()
       _state.update { currentState ->
         currentState.copy(
           countries = countries.sortedBy { it.name }

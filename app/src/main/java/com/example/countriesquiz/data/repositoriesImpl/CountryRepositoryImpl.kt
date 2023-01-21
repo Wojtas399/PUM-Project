@@ -2,8 +2,8 @@ package com.example.countriesquiz.data.repositoriesImpl
 
 import com.example.countriesquiz.data.countryApi.CountryApi
 import com.example.countriesquiz.data.countryApi.CountryApiModel
-import com.example.countriesquiz.domain.entities.Country
-import com.example.countriesquiz.domain.repositories.CountryRepository
+import com.example.countriesquiz.entities.Country
+import com.example.countriesquiz.repositories.CountryRepository
 import javax.inject.Inject
 
 class CountryRepositoryImpl @Inject constructor(

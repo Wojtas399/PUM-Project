@@ -1,4 +1,4 @@
-package com.example.countriesquiz.domain.entities
+package com.example.countriesquiz.entities
 
 data class Country(
   val name: String,

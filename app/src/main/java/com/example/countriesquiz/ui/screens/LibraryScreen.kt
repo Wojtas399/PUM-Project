@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.countriesquiz.domain.entities.Country
+import com.example.countriesquiz.entities.Country
 import com.example.countriesquiz.view_models.LibraryViewModel
 
 @Composable
