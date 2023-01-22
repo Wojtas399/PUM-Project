@@ -31,28 +31,28 @@ fun QuizSelectionScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text(
-      text = "Wybierz quiz",
+      text = "Choose quiz type",
       fontWeight = FontWeight.Bold,
       fontSize = 32.sp,
       textAlign = TextAlign.Center,
     )
     FreeSpace()
     CustomButton(
-      label = "Stolice",
+      label = "Capitals",
       onClick = {
         navigateToQuiz(QuizType.Capitals)
       },
     )
     FreeSpace()
     CustomButton(
-      label = "Flagi",
+      label = "Flags",
       onClick = {
         navigateToQuiz(QuizType.Flags)
       },
     )
     FreeSpace()
     CustomButton(
-      label = "Populacje",
+      label = "Populations",
       onClick = {
         navigateToQuiz(QuizType.Populations)
       }

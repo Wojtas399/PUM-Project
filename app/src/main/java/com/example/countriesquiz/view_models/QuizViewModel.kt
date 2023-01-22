@@ -19,7 +19,6 @@ enum class QuestionStatus {
 }
 
 data class QuizState(
-  val quizType: QuizType? = null,
   val points: Int = 0,
   val currentQuestionIndex: Int = 0,
   val currentQuestionStatus: QuestionStatus = QuestionStatus.Unchecked,
@@ -33,15 +32,17 @@ class QuizViewModel @Inject constructor(
   private val countryRepository: CountryRepository,
 ) : ViewModel() {
   private val _state = MutableStateFlow(QuizState())
+  private var quizType: QuizType? = null
   private var drawnCountries: MutableList<Country> = mutableListOf()
 
   val state: StateFlow<QuizState> = _state.asStateFlow()
 
   fun initialize(quizType: QuizType?) {
+    this.quizType = quizType
     runBlocking {
       val allCountries = countryRepository.getAllCountries()
       drawnCountries = allCountries.shuffled().take(10).toMutableList()
-      initializeQuestions(quizType)
+      initializeQuestions()
     }
   }
 
@@ -62,11 +63,11 @@ class QuizViewModel @Inject constructor(
     }
   }
 
-  private fun initializeQuestions(quizType: QuizType?) {
+  private fun initializeQuestions() {
     val questions = mutableListOf<Question>()
     for (index in 0..9) {
       questions.add(
-        createQuestion(index, quizType)
+        createQuestion(index)
       )
     }
     _state.update { currentState ->
@@ -78,7 +79,7 @@ class QuizViewModel @Inject constructor(
     }
   }
 
-  private fun createQuestion(index: Int, quizType: QuizType?): Question {
+  private fun createQuestion(index: Int): Question {
     if (drawnCountries.isNotEmpty()) {
       val country: Country = drawnCountries[index]
       val question: String
@@ -104,7 +105,7 @@ class QuizViewModel @Inject constructor(
       )
       val shuffledAnswers = answers.shuffled()
       return Question(
-        question = question,
+        value = question,
         correctAnswer = correctAnswer,
         answer1 = shuffledAnswers[0],
         answer2 = shuffledAnswers[1],
@@ -130,13 +131,13 @@ class QuizViewModel @Inject constructor(
       }
       createUncheckedAnswer(answer)
     }.toMutableList()
-    answersToDraw.removeIf { it.answer == correctAnswer }
+    answersToDraw.removeIf { it.value == correctAnswer }
     return answersToDraw.shuffled().take(3).toMutableList()
   }
 
   private fun createUncheckedAnswer(answer: String?): Answer {
     return Answer(
-      answer = answer,
+      value = answer,
       onClick = {
         answer?.let { checkAnswer(it) }
       },
@@ -169,9 +170,9 @@ class QuizViewModel @Inject constructor(
   private fun makeAnswerChecked(answer: Answer?): Answer {
     val currentQuestionIndex = _state.value.currentQuestionIndex
     return Answer(
-      answer = answer?.answer,
+      value = answer?.value,
       onClick = {},
-      color = if (answer?.answer == _state.value.questions[currentQuestionIndex].correctAnswer) {
+      color = if (answer?.value == _state.value.questions[currentQuestionIndex].correctAnswer) {
         Color.Green
       } else {
         Color.Red
@@ -181,7 +182,7 @@ class QuizViewModel @Inject constructor(
 }
 
 data class Question(
-  val question: String,
+  val value: String,
   val correctAnswer: String?,
   var answer1: Answer,
   var answer2: Answer,
@@ -190,7 +191,7 @@ data class Question(
 )
 
 data class Answer(
-  val answer: String?,
+  val value: String?,
   val onClick: () -> Unit,
   val color: Color,
 )
