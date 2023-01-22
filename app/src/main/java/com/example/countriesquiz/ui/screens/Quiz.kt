@@ -46,7 +46,7 @@ fun Quiz(
       if (isQuizFinished) {
         SummaryScreen(
           quizType = quizType,
-          points = 6,
+          points = quizState.points,
           questions = quizState.questions,
           globalNavController = globalNavController,
         )

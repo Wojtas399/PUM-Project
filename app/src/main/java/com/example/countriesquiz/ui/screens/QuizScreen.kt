@@ -132,7 +132,7 @@ private fun AnswerButton(
       Text(
         text = answer.value ?: "",
         textAlign = TextAlign.Center,
-        fontSize = if (quizType == QuizType.Flags) 28.sp else 18.sp,
+        fontSize = if (quizType == QuizType.Flags) 30.sp else 18.sp,
       )
     }
   }

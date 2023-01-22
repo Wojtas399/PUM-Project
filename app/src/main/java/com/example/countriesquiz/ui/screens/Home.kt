@@ -66,7 +66,6 @@ fun BottomNavigation(navController: NavController) {
   val items = listOf(
     BottomNavItem.QuizSelection,
     BottomNavItem.Library,
-    BottomNavItem.Progress,
   )
   BottomNavigation {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -76,17 +75,17 @@ fun BottomNavigation(navController: NavController) {
         icon = {
           Icon(
             painterResource(id = item.icon),
-            contentDescription = item.title
+            contentDescription = item.title,
           )
         },
         label = {
           Text(
             text = item.title,
-            fontSize = 9.sp
+            fontSize = 9.sp,
           )
         },
-        selectedContentColor = Color.Black,
-        unselectedContentColor = Color.Black.copy(0.4f),
+        selectedContentColor = Color.White,
+        unselectedContentColor = Color.White.copy(0.4f),
         alwaysShowLabel = true,
         selected = currentRoute == item.screen_route,
         onClick = {
@@ -119,9 +118,6 @@ private fun HomeNavGraph(
     }
     composable(BottomNavItem.Library.screen_route) {
       LibraryScreen()
-    }
-    composable(BottomNavItem.Progress.screen_route) {
-      ProgressScreen()
     }
   }
 }

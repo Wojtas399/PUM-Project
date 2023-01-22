@@ -140,6 +140,6 @@ private fun AnswerItem(
       .background(color = answer.color, shape = RoundedCornerShape(8.dp))
       .wrapContentSize(Alignment.Center),
     text = answer.value ?: "",
-    fontSize = if (quizType == QuizType.Flags) 28.sp else 18.sp,
+    fontSize = if (quizType == QuizType.Flags) 30.sp else 18.sp,
   )
 }
