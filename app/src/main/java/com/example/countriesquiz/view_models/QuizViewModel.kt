@@ -2,6 +2,7 @@ package com.example.countriesquiz.view_models
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.countriesquiz.entities.Country
 import com.example.countriesquiz.repositories.CountryRepository
 import com.example.countriesquiz.ui.screens.QuizType
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 enum class QuestionStatus {
@@ -19,6 +20,7 @@ enum class QuestionStatus {
 }
 
 data class QuizState(
+  val areDataLoaded: Boolean = false,
   val points: Int = 0,
   val currentQuestionIndex: Int = 0,
   val currentQuestionStatus: QuestionStatus = QuestionStatus.Unchecked,
@@ -39,7 +41,7 @@ class QuizViewModel @Inject constructor(
 
   fun initialize(quizType: QuizType?) {
     this.quizType = quizType
-    runBlocking {
+    viewModelScope.launch {
       val allCountries = countryRepository.getAllCountries()
       drawnCountries = allCountries.shuffled().take(10).toMutableList()
       initializeQuestions()
@@ -72,9 +74,10 @@ class QuizViewModel @Inject constructor(
     }
     _state.update { currentState ->
       currentState.copy(
+        areDataLoaded = true,
         currentQuestionIndex = 0,
         questions = questions.toList(),
-        currentQuestion = questions.first()
+        currentQuestion = questions.first(),
       )
     }
   }

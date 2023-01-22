@@ -29,7 +29,13 @@ fun LibraryScreen(
       items(countries) { LibraryItem(country = it) }
     }
   } else {
-    Text(text = "There is no countries...")
+    Column(
+      modifier = Modifier
+        .fillMaxSize()
+        .wrapContentSize(Alignment.Center)
+    ) {
+      Text(text = "Loading countries...")
+    }
   }
 }
 

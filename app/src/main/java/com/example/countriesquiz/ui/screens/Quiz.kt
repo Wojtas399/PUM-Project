@@ -1,20 +1,20 @@
 package com.example.countriesquiz.ui.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.countriesquiz.view_models.QuizViewModel
@@ -26,10 +26,13 @@ fun Quiz(
   quizViewModel: QuizViewModel = hiltViewModel(),
 ) {
   val quizState by quizViewModel.state.collectAsState()
-  val isQuizFinished: Boolean = quizState.isQuizFinished
 
   LaunchedEffect(key1 = quizType) {
     quizViewModel.initialize(quizType)
+  }
+
+  if (!quizState.areDataLoaded) {
+    LoadingDialog()
   }
 
   Scaffold(
@@ -41,9 +44,11 @@ fun Quiz(
     },
   ) { padding ->
     Box(
-      modifier = Modifier.fillMaxSize().padding(padding)
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(padding)
     ) {
-      if (isQuizFinished) {
+      if (quizState.isQuizFinished) {
         SummaryScreen(
           quizType = quizType,
           points = quizState.points,
@@ -68,7 +73,7 @@ private fun TopAppBar(
   quizType: QuizType?,
   globalNavController: NavHostController,
 ) {
-  androidx.compose.material.TopAppBar(
+  TopAppBar(
     title = {
       Text(text = "$quizType Quiz")
     },
@@ -84,4 +89,24 @@ private fun TopAppBar(
       }
     },
   )
+}
+
+@Composable
+private fun LoadingDialog() {
+  Dialog(
+    onDismissRequest = {}
+  ) {
+    Column(
+      modifier = Modifier
+        .size(100.dp)
+        .background(
+          color = Color.White,
+          shape = RoundedCornerShape(4.dp)
+        ),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center,
+    ) {
+      CircularProgressIndicator()
+    }
+  }
 }
